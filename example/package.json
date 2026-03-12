@@ -1,0 +1,35 @@
+{
+  "name": "mazenx47",
+  "version": "1.0.0",
+  "description": "Mazen Yasser's developer business card — run `npx mazenx47` in your terminal",
+  "main": "card.js",
+  "bin": {
+    "mazen": "card.js"
+  },
+  "scripts": {
+    "start": "node card.js"
+  },
+  "keywords": [
+    "cli",
+    "business-card",
+    "developer",
+    "npx",
+    "terminal"
+  ],
+  "author": "Mazen Yasser",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MazenYasser/mazen.git"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
+    "chalk-animation": "^1.6.0",
+    "inquirer": "^8.2.6",
+    "open": "^8.4.2"
+  }
+}
