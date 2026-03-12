@@ -46,4 +46,3 @@ Then restart Claude Code.
 npx mazenx47
 ```
 
-Built by [Mazen Yasser](https://github.com/MazenYasser) using this exact skill.
