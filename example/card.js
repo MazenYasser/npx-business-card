@@ -26,21 +26,22 @@ const links = {
 };
 
 // ── Big Name Banner (figlet ANSI Shadow) ───────────────────
-const bigName =
-  accent(figlet.textSync("MAZEN",  { font: "ANSI Shadow" })) +
-  accent(figlet.textSync("YASSER", { font: "ANSI Shadow" }));
+const rawName =
+  figlet.textSync("MAZEN",  { font: "ANSI Shadow" }).trimEnd() + "\n" +
+  figlet.textSync("YASSER", { font: "ANSI Shadow" }).trimEnd();
+const bigName = accent(rawName);
 
 // ── Python Logo ────────────────────────────────────────────
 const pythonLogo = [
-  pyBlue("  ╭──────────╮  "),
-  pyBlue("  │ ◉        │  "),
-  pyBlue("  │          ├──╮"),
-  pyBlue("  ╰──────────╯  │"),
-  pyGold("             ╭──╯"),
-  pyGold("  ╭──────────╮  "),
-  pyGold("  │          │  "),
-  pyGold("  │        ◉ │  "),
-  pyGold("  ╰──────────╯  "),
+  pyBlue("  ╭──────────────────╮    "),
+  pyBlue("  │ ◉                │    "),
+  pyBlue("  │                  ├──╮ "),
+  pyBlue("  ╰──────────────────╯  │ "),
+  pyGold("                     ╭──╯ "),
+  pyGold("  ╭──────────────────╮    "),
+  pyGold("  │                  │    "),
+  pyGold("  │                ◉ │    "),
+  pyGold("  ╰──────────────────╯    "),
 ].join("\n");
 
 // ── Card Data ──────────────────────────────────────────────
