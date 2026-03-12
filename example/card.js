@@ -7,71 +7,60 @@ const boxen = require("boxen");
 const chalkAnimation = require("chalk-animation");
 const inquirer = require("inquirer");
 const open = require("open");
+const figlet = require("figlet");
 
 // ── Color Palette ──────────────────────────────────────────
-const purple = chalk.hex("#C084FC");
-const green = chalk.green;
-const dim = chalk.gray;
-const bold = chalk.white.bold;
-const label = chalk.hex("#C084FC").bold;
+const accent  = chalk.hex("#C084FC");        // lavender-purple
+const green   = chalk.green;                  // skills
+const dim     = chalk.gray;                   // secondary text
+const bold    = chalk.white.bold;             // name only
+const label   = chalk.hex("#C084FC").bold;    // field labels
+const pyBlue  = chalk.hex("#4B8BBE");         // Python blue
+const pyGold  = chalk.hex("#FFE873");         // Python gold
 
 // ── Links ──────────────────────────────────────────────────
 const links = {
-  github: "https://github.com/MazenYasser",
+  github:   "https://github.com/MazenYasser",
   linkedin: "https://www.linkedin.com/in/mazen-yasser225/",
-  email: "mailto:mazenyasserx47@gmail.com",
+  email:    "mailto:mazenyasserx47@gmail.com",
 };
 
-// ── Card Data ──────────────────────────────────────────────
-const name = bold("               Mazen Yasser");
-const title = purple("         Engineering Manager") + dim(" @ ") + purple("TJM Labs");
-const prev = dim("     prev. Lead Software Engineer @ TJM Labs");
+// ── Big Name Banner (figlet ANSI Shadow) ───────────────────
+const bigName =
+  accent(figlet.textSync("MAZEN",  { font: "ANSI Shadow" })) +
+  accent(figlet.textSync("YASSER", { font: "ANSI Shadow" }));
 
-const divider = dim("     ─────────────────────────────────────");
+// ── Python Logo ────────────────────────────────────────────
+const pythonLogo = [
+  pyBlue("  ╭──────────╮  "),
+  pyBlue("  │ ◉        │  "),
+  pyBlue("  │          ├──╮"),
+  pyBlue("  ╰──────────╯  │"),
+  pyGold("             ╭──╯"),
+  pyGold("  ╭──────────╮  "),
+  pyGold("  │          │  "),
+  pyGold("  │        ◉ │  "),
+  pyGold("  ╰──────────╯  "),
+].join("\n");
+
+// ── Card Data ──────────────────────────────────────────────
+const name     = bold("               Mazen Yasser");
+const title    = accent("         Engineering Manager") + dim(" @ ") + accent("TJM Labs");
+const prev     = dim("     prev. Lead Software Engineer @ TJM Labs");
+const divider  = dim("     ─────────────────────────────────────");
 
 const skills =
-  label("    Skills") +
-  dim(":  ") +
-  green("Python") +
-  dim(" / ") +
-  green("Django") +
-  dim(" / ") +
-  green("FastAPI") +
-  dim(" / ") +
+  label("    Skills") + dim(":  ") +
+  green("Python")       + dim(" / ") +
+  green("Django")       + dim(" / ") +
+  green("FastAPI")      + dim(" / ") +
   green("AI Automations");
 
-const github =
-  label("    GitHub") +
-  dim(":  ") +
-  dim("https://github.com/") +
-  purple("MazenYasser");
-
-const linkedin =
-  label("  LinkedIn") +
-  dim(":  ") +
-  dim("linkedin.com/in/") +
-  purple("mazen-yasser225");
-
-const email =
-  label("     Email") +
-  dim(":  ") +
-  purple("mazenyasserx47@gmail.com");
-
-const website = label("   Website") + dim(":  ") + purple("[coming soon]");
-
-const footer =
-  dim("     Run ") + purple("npx mazenx47") + dim(" anytime to find me");
-
-// ── ASCII Art ──────────────────────────────────────────────
-const ascii = purple(
-  [
-    "",
-    "     ╔═══════════════════════════════════╗",
-    "     ║  " + bold("> ") + dim("whoami") + "                          ║",
-    "     ╚═══════════════════════════════════╝",
-    "",
-  ].join("\n")
-);
+const github   = label("    GitHub") + dim(":  ") + dim("https://github.com/") + accent("MazenYasser");
+const linkedin = label("  LinkedIn") + dim(":  ") + dim("linkedin.com/in/")    + accent("mazen-yasser225");
+const email    = label("     Email") + dim(":  ") + accent("mazenyasserx47@gmail.com");
+const website  = label("   Website") + dim(":  ") + accent("[coming soon]");
+const footer   = dim("     Run ") + accent("npx mazenx47") + dim(" anytime to find me");
 
 // ── Card Assembly ──────────────────────────────────────────
 const card = [
@@ -112,43 +101,37 @@ function sleep(ms) {
 async function main() {
   console.clear();
 
-  // Phase 1: Animated intro
+  // Animated intro
   const intro = chalkAnimation.neon(
     "\n     > Mazen Yasser — Engineering Manager @ TJM Labs\n",
     1.5
   );
-
   await sleep(1800);
   intro.stop();
-
-  // Phase 2: ASCII header + card
   console.clear();
-  console.log(ascii);
+
+  // Big pixel name
+  console.log(bigName);
+
+  // whoami prompt + Python logo
+  console.log(dim("  > ") + dim("whoami") + "\n");
+  console.log(pythonLogo);
+  console.log();
+
+  // Card
   console.log(boxen(card, boxenOptions));
 
-  // Phase 3: Interactive menu
+  // Interactive menu
   const { action } = await inquirer.prompt([
     {
       type: "list",
       name: "action",
-      message: purple("Curious? Pick an option:"),
+      message: accent("Curious? Pick an option:"),
       choices: [
-        {
-          name: `${purple(">")} Open ${bold("GitHub")} profile`,
-          value: "github",
-        },
-        {
-          name: `${purple(">")} Open ${bold("LinkedIn")} profile`,
-          value: "linkedin",
-        },
-        {
-          name: `${purple(">")} Send me an ${bold("Email")}`,
-          value: "email",
-        },
-        {
-          name: `${dim(">")} Exit`,
-          value: "exit",
-        },
+        { name: `${accent(">")} Open ${bold("GitHub")} profile`,   value: "github"   },
+        { name: `${accent(">")} Open ${bold("LinkedIn")} profile`, value: "linkedin" },
+        { name: `${accent(">")} Send me an ${bold("Email")}`,      value: "email"    },
+        { name: `${dim(">")} Exit`,                                 value: "exit"     },
       ],
     },
   ]);
@@ -158,7 +141,7 @@ async function main() {
     await open(links[action]);
   }
 
-  console.log(purple("\n     Thanks for stopping by!\n"));
+  console.log(accent("\n     Thanks for stopping by!\n"));
 }
 
 main().catch(console.error);
